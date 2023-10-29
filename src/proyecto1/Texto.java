@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Texto {
     private static Component areaTexto;
+    
     public static File FileChooser() {
        
     File fichero = null;
@@ -71,7 +72,7 @@ public class Texto {
 
       public static GrafoMA LeerTxt(File archivo){
 
-        Lista<String> usuarios = new Lista<>();
+        Lista<Object> usuarios = new Lista<>();
         Lista<Object> lista_relaciones = new Lista<>();
         String nombre_usuario = "";
         
@@ -113,11 +114,9 @@ public class Texto {
                             }
                             i++;
                     }
+                    
+                  
 //                            
-//                        
-//                    }
-//                        
-//                    
 //                //En este bucle se buscan las conexiones registradas en el archivo seleccionado
 //                    
                     while (datos[i].equalsIgnoreCase("relaciones;")){
@@ -137,7 +136,7 @@ public class Texto {
                     }
         
                 br.close();
-                JOptionPane.showMessageDialog(null, "Lectura exitosa");
+                JOptionPane.showMessageDialog(null, "¡Lectura Exitosa!");
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);}
@@ -146,7 +145,10 @@ public class Texto {
             GrafoMA grafo = new GrafoMA(usuarios.getSize()-1);
             grafo.insertarUsuariosTxt(usuarios);
 //          Aqui se le agrega al grafo las relaciones
-            
+            grafo.setUsuarios(usuarios);
+            grafo.setRelaciones(lista_relaciones);
+//          Aquí se le asignan las listas a el grafo
+
 //          Aqui se retorna el grafo ya creado
             return grafo;
       }

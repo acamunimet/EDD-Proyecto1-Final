@@ -13,6 +13,16 @@ public class GrafoMA {
     private int maxNodos;                 
     private int numVertices;              
     private int matrizAdy [ ] [ ];
+    private Lista usuarios;
+    private Lista relaciones;
+
+    public void setUsuarios(Lista usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public void setRelaciones(Lista relaciones) {
+        this.relaciones = relaciones;
+    }
     
     public GrafoMA(boolean d) {
         dirigido = d;
@@ -79,10 +89,10 @@ public class GrafoMA {
     }
     
      public void insertarVertice(String nombre) {
-        Usuario nuevo= new Usuario(nombre,this.getNumVertices() +1);
+        Usuario nuevo = new Usuario(nombre,this.getNumVertices() +1);
         int n = 1;
         if ( n > maxNodos - numVertices ) 
-            System.out.println ("Error, se supera el número de nodos máximo"); 
+            System.out.println ("Error, se supera el número de nodos máximo."); 
         else { 
             for (int i=0; i < numVertices + n; i++) { 
                 for (int j = numVertices; j < numVertices + n; j++)  
@@ -137,13 +147,16 @@ public class GrafoMA {
     }
     
     public void insertarRelaciones(Lista relaciones, Lista usuarios) {
-        if(i>numVertices || j>numVertices){
-            System.out.println("ERROR");
-        }else{
-        matrizAdy [i] [j] = true?1:0; 
-        if (!dirigido)  
-            matrizAdy [j] [i] = matrizAdy [i] [j];
-        }
+        for (int i = 0; i < numVertices; i++) {
+            for(int j = 0; j < numVertices; j++)
+                if ( i >numVertices || j > numVertices) {
+                    System.out.println("ERROR");
+                }else{
+                matrizAdy [i] [j] = true?1:0; 
+                if (!dirigido)  
+                    matrizAdy [j] [i] = matrizAdy [i] [j];
+                }
+            }
     }
     
     public void eliminarArista(int i, int j) {
