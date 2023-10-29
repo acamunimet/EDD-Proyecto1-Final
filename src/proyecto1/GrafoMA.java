@@ -4,6 +4,9 @@
  */
 package proyecto1;
 
+import static java.awt.image.ImageObserver.HEIGHT;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -16,14 +19,6 @@ public class GrafoMA {
     private Lista usuarios;
     private Lista relaciones;
 
-    public void setUsuarios(Lista usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public void setRelaciones(Lista relaciones) {
-        this.relaciones = relaciones;
-    }
-    
     public GrafoMA(boolean d) {
         dirigido = d;
         maxNodos = numVertices;
@@ -51,6 +46,21 @@ public class GrafoMA {
         this.matrizAdy = new int [maxNodos] [maxNodos];
     }
     
+    public void setUsuarios(Lista usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public void setRelaciones(Lista relaciones) {
+        this.relaciones = relaciones;
+    }
+
+    public Lista getUsuarios() {
+        return usuarios;
+    }
+
+    public Lista getRelaciones() {
+        return relaciones;
+    }
     
     public boolean isDirigido() {
         return dirigido;
@@ -104,18 +114,14 @@ public class GrafoMA {
     }
      
      public void insertarUsuariosTxt(Lista usuarios) {
-        int n = usuarios.getSize();
-        if ( n > maxNodos - numVertices ) 
-            System.out.println ("Error, se supera el número de nodos máximo"); 
-        else { 
-            for (int i=0; i < numVertices + n; i++) { 
-                for (int j = numVertices; j < numVertices + n; j++)  
-                    matrizAdy [i] [j] = matrizAdy [j] [i] = false?1:0; 
-                 } 
+        int n = usuarios.getSize(); //13
+        for (int i=0; i < numVertices + n; i++) {       //Mientras i menor que 13
+            for (int j = 0; j < numVertices + n; j++)  //Mientras j menor que 13
+                matrizAdy [i] [j] = matrizAdy [j] [i] = false?1:0; // 0 0
+        } 
         numVertices = numVertices + n; 
     
-        }
-    }
+     }
      
      public void eliminarVertice(Usuario persona) {
         int n;
@@ -135,6 +141,16 @@ public class GrafoMA {
         }
         numVertices -=1;
     }
+     
+    public Usuario retornar_usuario(String nombre) {
+        Nodo<Usuario> aux = this.usuarios.getFirst();
+        for (int i = 0; i < this.usuarios.getSize(); i++) {
+            if (aux.getElement().nombre != nombre) {
+                aux = aux.getNext();
+            }
+        }
+        return aux.getElement();
+    }
     
     public void insertaArista(int i, int j) {
         if(i>numVertices || j>numVertices){
@@ -147,16 +163,23 @@ public class GrafoMA {
     }
     
     public void insertarRelaciones(Lista relaciones, Lista usuarios) {
-        for (int i = 0; i < numVertices; i++) {
-            for(int j = 0; j < numVertices; j++)
-                if ( i >numVertices || j > numVertices) {
-                    System.out.println("ERROR");
-                }else{
-                matrizAdy [i] [j] = true?1:0; 
-                if (!dirigido)  
-                    matrizAdy [j] [i] = matrizAdy [i] [j];
+        Nodo<Conexion> aux1 = relaciones.getFirst();
+        for (int k = 0; k < this.relaciones.getSize(); k++) {
+            String nombre_inicio = aux1.getElement().getInicio();
+            String nombre_destino = aux1.getElement().getDestino();
+            Usuario usuario_inicio = this.retornar_usuario(nombre_inicio);
+            Usuario usuario_destino = this.retornar_usuario(nombre_destino);
+            int i = usuario_inicio.numero;
+            int j = usuario_destino.numero;
+            if (i > numVertices || j > numVertices){
+                JOptionPane.showMessageDialog(null, "Este usuario no se encuentra dentro del sistema.", "Error", HEIGHT);
+            }else{
+                matrizAdy[i][j] = true?1:0;
+                if (!dirigido)
+                    matrizAdy[j][i] = matrizAdy[i][j];
                 }
-            }
+            aux1 = aux1.getNext();
+        }
     }
     
     public void eliminarArista(int i, int j) {

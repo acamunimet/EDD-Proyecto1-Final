@@ -98,7 +98,7 @@ public class Welcome extends javax.swing.JFrame {
 
     private void Boton_EditarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_EditarDatosActionPerformed
     //Este algoritmo verifica que hayan datos cargados antes de avanzar en la interfaz
-        if (grafo.esVacio()) {
+        if (grafo == null) {
             JOptionPane.showMessageDialog(null, "¡Aún no hay ningún archivo cargado!", "Error", HEIGHT);
         } else{
             new DataEdition(this, grafo);
@@ -107,11 +107,12 @@ public class Welcome extends javax.swing.JFrame {
 
     private void Boton_CargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_CargarDatosActionPerformed
        // En esta sección se carga el archivo txt para la construcción del grafo
-      Texto txt = new Texto();
-      File archivo = txt.FileChooser();
-      txt.LeerFichero(archivo);
-      GrafoMA grafo_registrado = txt.LeerTxt(archivo);
-      this.setGrafo(grafo_registrado);
+        Texto txt = new Texto();
+        File archivo = txt.FileChooser();
+        txt.LeerFichero(archivo);
+        GrafoMA grafo_registrado = txt.LeerTxt(archivo);
+        this.setGrafo(grafo_registrado);
+        grafo.imprimirMA();
     }//GEN-LAST:event_Boton_CargarDatosActionPerformed
 
     private void Boton_MostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_MostrarGrafoActionPerformed

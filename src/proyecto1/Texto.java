@@ -33,7 +33,7 @@ public class Texto {
    
    public static void LeerFichero(File archivo) {
        
-      if (archivo == null) {JOptionPane.showMessageDialog(null, "No ha seleccionado ningún archivo");} 
+      if (archivo == null) {JOptionPane.showMessageDialog(null, "No ha seleccionado ningún archivo.");} 
    
       else {
       
@@ -72,8 +72,8 @@ public class Texto {
 
       public static GrafoMA LeerTxt(File archivo){
 
-        Lista<Object> usuarios = new Lista<>();
-        Lista<Object> lista_relaciones = new Lista<>();
+        Lista<Usuario> usuarios = new Lista<>();
+        Lista<Conexion> lista_relaciones = new Lista<>();
         String nombre_usuario = "";
         
         String line;
@@ -115,7 +115,7 @@ public class Texto {
                             i++;
                     }
                     
-                  
+                    usuarios.imprimir();            // PRUEBA!!!
 //                            
 //                //En este bucle se buscan las conexiones registradas en el archivo seleccionado
 //                    
@@ -133,23 +133,29 @@ public class Texto {
 //                        
 //
                             }
+                    lista_relaciones.imprimir();
                     }
-        
+                
                 br.close();
                 JOptionPane.showMessageDialog(null, "¡Lectura Exitosa!");
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);}
         
-//          Aqui se crearia el grafo con las listas ya creadas
-            GrafoMA grafo = new GrafoMA(usuarios.getSize()-1);
-            grafo.insertarUsuariosTxt(usuarios);
-//          Aqui se le agrega al grafo las relaciones
-            grafo.setUsuarios(usuarios);
-            grafo.setRelaciones(lista_relaciones);
-//          Aquí se le asignan las listas a el grafo
+//      Aqui se crearia el grafo con las listas ya creadas
+        GrafoMA grafo = new GrafoMA(usuarios.getSize());
 
-//          Aqui se retorna el grafo ya creado
-            return grafo;
+//      Aquí se le asignan las listas al grafo
+        grafo.setUsuarios(usuarios);
+        grafo.setRelaciones(lista_relaciones);
+
+//      Aquí se insertan los usuarios en la matriz a partir de la longitud de la lista de usuarios            
+        grafo.insertarUsuariosTxt(usuarios);
+
+//      Aquí se insertan al grafo sus relaciones
+        grafo.insertarRelaciones(usuarios,lista_relaciones);
+
+//      Aqui se retorna el grafo ya creado
+        return grafo;
       }
 }

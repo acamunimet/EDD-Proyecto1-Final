@@ -101,4 +101,29 @@ public class Lista <T> {
             size++;    
         }
     }
+    
+    public boolean buscar(T valor){
+        Nodo<Usuario> aux = this.First;
+        while (aux != null) {
+            if(aux.getElement().nombre == valor){
+                return true;
+            }else{
+                aux = aux.getNext();
+            }
+        }
+        return false;
+    }
+    
+    public void imprimir(){
+        if (!isEmpty()){
+            Nodo aux = this.getFirst();
+            for (int i = 0; i < size; i++) {
+                System.out.println(aux.getElement()+" ");
+                aux = aux.getNext();
+            }
+            
+        }else{
+            System.out.println("Lista vacía");
+        }
+    }
 }

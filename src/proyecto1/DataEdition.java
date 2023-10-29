@@ -86,11 +86,18 @@ public class DataEdition extends javax.swing.JFrame {
     private void Boton_EliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_EliminarUsuarioActionPerformed
         //¡¡AQUÍ VA UN CONDICIONAL QUE SAQUE ERROR SI EL USUARIO A ELIMINAR NO ESTÁ EN LA LISTA!!
         String user_deletion = JOptionPane.showInputDialog(null, "Ingrese el usuario que desea eliminar: ");
-        JOptionPane.showMessageDialog(null, "¡Usuario eliminado!");
+        if (grafo.getUsuarios().buscar(user_deletion)) {
+            grafo.eliminarVertice(grafo.retornar_usuario(user_deletion));
+            JOptionPane.showMessageDialog(null, "¡Usuario eliminado exitosamente!");
+        } else{
+            JOptionPane.showMessageDialog(null, "¡El usuario indicado no se encuentra en el sistema!", "Error", HEIGHT);
+        }
+//        ¡¡FALTA ACTUALIZAR EL TXT!!
     }//GEN-LAST:event_Boton_EliminarUsuarioActionPerformed
 
     private void Boton_AgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_AgregarUsuarioActionPerformed
         String user_addition = JOptionPane.showInputDialog(null, "Ingrese el usuario que desea agregar: ");
+        grafo.insertarVertice(user_addition);
     }//GEN-LAST:event_Boton_AgregarUsuarioActionPerformed
 
     /**
