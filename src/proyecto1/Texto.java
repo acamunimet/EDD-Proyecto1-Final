@@ -11,7 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 /**
  *
- * @author User
+ * @author cesar, juan, andre
  */
 public class Texto {
     private static Component areaTexto;
@@ -115,11 +115,10 @@ public class Texto {
                             i++;
                     }
                     
-                    usuarios.imprimir();            // PRUEBA!!!
 //                            
 //                //En este bucle se buscan las conexiones registradas en el archivo seleccionado
 //                    
-                    while (datos[i].equalsIgnoreCase("relaciones;")){
+                    while (datos[i].equalsIgnoreCase("relaciones")){
                         i++;
                             while(i<datos.length){
                                 String[] atri = datos[i].split(",");
@@ -133,7 +132,6 @@ public class Texto {
 //                        
 //
                             }
-                    lista_relaciones.imprimir();
                     }
                 
                 br.close();
@@ -153,7 +151,7 @@ public class Texto {
         grafo.insertarUsuariosTxt(usuarios);
 
 //      Aquí se insertan al grafo sus relaciones
-        grafo.insertarRelaciones(usuarios,lista_relaciones);
+//        grafo.insertarRelaciones(usuarios,lista_relaciones);        //!!!!!!!!
 
 //      Aqui se retorna el grafo ya creado
         return grafo;

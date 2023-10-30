@@ -112,11 +112,15 @@ public class Welcome extends javax.swing.JFrame {
         txt.LeerFichero(archivo);
         GrafoMA grafo_registrado = txt.LeerTxt(archivo);
         this.setGrafo(grafo_registrado);
-        grafo.imprimirMA();
     }//GEN-LAST:event_Boton_CargarDatosActionPerformed
 
     private void Boton_MostrarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_MostrarGrafoActionPerformed
-        // ¡¡AQUÍ SE DEBE EJECUTAR LA FUNCIÓN DE MOSTRAR EL GRAFO!!
+        if (grafo == null) {
+            JOptionPane.showMessageDialog(null, "¡Aún no hay ningún archivo cargado!", "Error", HEIGHT);
+        } else{    
+            grafo.imprimirMA();
+            JOptionPane.showMessageDialog(null, "¡Matriz de adyacencia impresa exitosamente!");
+        }
     }//GEN-LAST:event_Boton_MostrarGrafoActionPerformed
 
     /**

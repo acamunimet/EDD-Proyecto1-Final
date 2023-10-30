@@ -6,7 +6,7 @@ package proyecto1;
 
 /**
  *
- * @author User
+ * @author juan
  */
 public class Lista <T> {
     private Nodo First;
@@ -102,13 +102,13 @@ public class Lista <T> {
         }
     }
     
-    public boolean buscar(T valor){
+    public boolean buscar(String valor){
         Nodo<Usuario> aux = this.First;
         while (aux != null) {
-            if(aux.getElement().nombre == valor){
-                return true;
-            }else{
+            if(!aux.getElement().nombre.equals(valor)){
                 aux = aux.getNext();
+            }else{
+                return true;
             }
         }
         return false;

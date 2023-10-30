@@ -6,7 +6,7 @@ package proyecto1;
 
 /**
  *
- * @author User
+ * @author juan, andre
  */
 public class Main {
 
